@@ -14,7 +14,7 @@ provider "azurerm" {
 # 1. Resource Group
 resource "azurerm_resource_group" "rg" {
   name     = "rg-azure-rag-dev"
-  location = "East US"
+  location = "Centralindia"
 }
 
 # 2. Container Registry
