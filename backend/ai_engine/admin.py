@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Document
 
-# Register your models here.
+# This registers the "Documents" table so you can see it in the Admin Panel
+admin.site.register(Document)
