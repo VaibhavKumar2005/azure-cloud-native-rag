@@ -245,3 +245,8 @@ mongodb_data/
 Thumbs.db
 .vscode/
 .idea/
+
+# --- Project Specifics ---
+postgres_data/
+mongo_data/
+backend/media/
