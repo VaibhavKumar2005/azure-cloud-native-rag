@@ -1,27 +1,31 @@
-# 📚 Librarian: Verifiable Cloud-Native RAG System
+# ☁️ Cloud Native AI Library System
 > **Academic Project 46:** Retrieval-Augmented Generation for Verifiable and Faithful Text Generation.
 
 ## 🚀 Overview
-**Librarian** is an advanced **Verifiable RAG (Retrieval-Augmented Generation) System** designed to solve the critical problem of LLM hallucinations in high-stakes environments. 
+**Cloud Native AI Library System** is an advanced **Verifiable RAG (Retrieval-Augmented Generation) Architecture** deployed on Microsoft Azure. It is engineered to solve the critical problem of LLM hallucinations in high-stakes academic and professional environments.
 
-Unlike standard chatbots that simply "guess" answers based on retrieved text, Librarian implements a **Closed-Loop Verification Architecture**. It introduces a secondary "Critic" agent that mathematically evaluates the faithfulness of every generated answer against the source documents before presenting it to the user.
+Unlike standard chatbots that simply "guess" answers based on retrieved text, this system implements a **Closed-Loop Verification Architecture**. It introduces a secondary "Critic" agent that mathematically evaluates the faithfulness of every generated answer against the source documents before presenting it to the user.
 
 ## 🏗 Architecture
 The system moves beyond linear RAG pipelines to a cyclic **Generate-Verify-Refine** workflow:
 
-1.  **Ingestion Layer:** - PDFs are parsed, chunked, and embedded using **Google Gemini** embeddings.
+1.  **Ingestion Layer:**
+    - Documents (PDFs) are parsed, chunked, and embedded using **Google Gemini** embeddings.
     - Vectors are stored in **PostgreSQL** using the `pgvector` extension for high-dimensional semantic search.
-2.  **Retrieval Engine (`librarian` app):** - Performs semantic search to retrieve the top-k most relevant document chunks.
-3.  **Generation:** - The LLM drafts a response citing specific chunk IDs (e.g., `[Source: 12]`).
-4.  **The Verifier (`verifier` app) — *Core Innovation*:** - A dedicated "Critic" module cross-references the drafted answer against the raw source text.
+2.  **Retrieval Engine:**
+    - Performs semantic search to retrieve the top-k most relevant document chunks.
+3.  **Generation:**
+    - The LLM drafts a response citing specific chunk IDs (e.g., `[Source: 12]`).
+4.  **The Verifier (Core Innovation):**
+    - A dedicated "Critic" module cross-references the drafted answer against the raw source text.
     - Calculates a **Faithfulness Score** (0-100%).
     - If the score is low, the system flags the answer as a hallucination or attempts a regeneration.
 
-## ⚡ Key Features (Project Requirements)
+## ⚡ Key Features
 - [x] **Answer-Evidence Alignment:** Automated verification ensuring every claim is backed by source text.
 - [x] **Faithfulness Scoring:** Real-time reliability metric displayed to the user (e.g., 🟢 95% Verified).
 - [x] **Granular Citations:** Clickable references linking directly to the specific PDF page and paragraph.
-- [x] **Hallucination Detection:** proactively filters out unsupported claims.
+- [x] **Hallucination Detection:** Proactively filters out unsupported claims.
 - [x] **Cloud-Native Deployment:** Containerized microservices architecture ready for Azure Kubernetes Service (AKS).
 
 ## 🛠 Tech Stack
@@ -57,8 +61,8 @@ The system moves beyond linear RAG pipelines to a cyclic **Generate-Verify-Refin
 ### **2. Backend Setup (Django)**
 ```bash
 # Clone the repository
-git clone [https://github.com/yourusername/librarian-rag.git](https://github.com/yourusername/librarian-rag.git)
-cd librarian-rag
+git clone [https://github.com/VaibhavKumar2005/cloud-native-ai-library-system.git](https://github.com/VaibhavKumar2005/cloud-native-ai-library-system.git)
+cd cloud-native-ai-library-system
 
 # Activate Virtual Environment
 # Windows
@@ -73,9 +77,8 @@ pip install -r requirements.txt
 # Create a .env file in the root directory:
 # GOOGLE_API_KEY=your_gemini_key
 # DATABASE_URL=postgres://user:password@localhost:5432/librarian_db
-# DEBUG=True
 
-# Database Migrations
+# Run Migrations
 python manage.py makemigrations
 python manage.py migrate
 
