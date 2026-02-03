@@ -1,20 +1,23 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .logic import get_verified_answer
-import json
+from .rag_logic import get_verified_answer
 
 @api_view(['POST'])
 def query_llm(request):
+    """
+    API Endpoint that receives a user question,
+    passes it to the RAG logic, and returns the verification.
+    """
+    # 1. Get the 'query' from the frontend JSON
     user_query = request.data.get('query')
     
-    # Trigger the real RAG + Verification logic
-    raw_ai_response = get_verified_answer(user_query)
+    if not user_query:
+        return Response({"error": "No query provided"}, status=400)
     
-    # Parse the AI's JSON response
-    try:
-        data = json.loads(raw_ai_response)
-    except:
-        # Fallback if AI doesn't return clean JSON
-        data = {"answer": "Error parsing AI response", "faithfulness_score": 0}
+    print(f"🔍 Received Query: {user_query}")
 
-    return Response(data)
+    # 2. Call the new function we just added to rag_logic.py
+    result = get_verified_answer(user_query)
+    
+    # 3. Return the result (Answer + Faithfulness Score)
+    return Response(result)
