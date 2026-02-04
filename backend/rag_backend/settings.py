@@ -24,13 +24,20 @@ load_dotenv(os.path.join(BASE_DIR.parent, '.env'))
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-l^@4l1_jraxb-1x%l-^tg_#q=nm6vxsr@z*o#p$p9#=a$e-k%0'
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ["*"]
+# SECURITY WARNING: keep the secret key used in production secret!
+import secrets
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    secrets.token_urlsafe(50) if DEBUG else None  # Generate random key for dev, require env var for prod
+)
+
+if not SECRET_KEY:
+    raise ValueError("DJANGO_SECRET_KEY environment variable must be set in production")
+
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
 
 
 # Application definition
@@ -139,4 +146,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOW_ALL_ORIGINS = True
+# CORS Settings - More secure configuration
+CORS_ALLOW_ALL_ORIGINS = DEBUG  # Only allow all origins in development
+if not DEBUG:
+    CORS_ALLOWED_ORIGINS = os.environ.get(
+        'CORS_ALLOWED_ORIGINS',
+        'http://localhost:5173,http://127.0.0.1:5173'
+    ).split(',')
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
+
+# Security Headers
+if not DEBUG:
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    X_FRAME_OPTIONS = 'DENY'

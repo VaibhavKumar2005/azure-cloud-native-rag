@@ -17,8 +17,10 @@
 
 ### 4. **Environment Variables Loaded**
 - ✅ Settings now load `.env` file with `python-dotenv`
-- ✅ Google API key: `AIzaSyBGAHbNUWWoWI_3ipfDJedEA3rh9FNMnFQ`
+- ✅ Google API key configured from environment variables
 - ✅ Database credentials configured
+
+⚠️ **SECURITY:** All secrets are now stored in `.env` file (not tracked in Git)
 
 ### 5. **pgvector Extension Enabled**
 - ✅ pgvector 0.8.1 installed and verified in PostgreSQL

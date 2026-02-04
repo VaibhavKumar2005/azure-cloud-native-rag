@@ -6,7 +6,7 @@ services:
     container_name: rag-vault
     ports: ["8200:8200"]
     environment:
-      VAULT_DEV_ROOT_TOKEN_ID: "root"
+      VAULT_DEV_ROOT_TOKEN_ID: "${VAULT_TOKEN:-root}"
       VAULT_ADDR: "http://0.0.0.0:8200"
     cap_add: ["IPC_LOCK"]
     networks: ["rag-network"]
@@ -15,9 +15,9 @@ services:
     image: pgvector/pgvector:pg16
     container_name: rag-postgres
     environment:
-      POSTGRES_USER: "admin"
-      POSTGRES_PASSWORD: "devpassword"
-      POSTGRES_DB: "ragdb"  # <--- FIXED: Matches your Python code
+      POSTGRES_USER: "${POSTGRES_USER:-admin}"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-devpassword}"
+      POSTGRES_DB: "${POSTGRES_DB:-ragdb}"
     ports: ["5432:5432"]
     volumes: ["postgres_data:/var/lib/postgresql/data"]
     networks: ["rag-network"]
@@ -27,8 +27,8 @@ services:
     container_name: rag-mongo
     ports: ["27017:27017"]
     environment:
-      MONGO_INITDB_ROOT_USERNAME: "admin"
-      MONGO_INITDB_ROOT_PASSWORD: "devpassword"
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USER:-admin}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_PASSWORD:-devpassword}"
     volumes: ["mongo_data:/data/db"]
     networks: ["rag-network"]
 

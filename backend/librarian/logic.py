@@ -8,7 +8,10 @@ from langchain_community.vectorstores import PGVector
 
 # --- CONFIGURATION ---
 # Ensure this matches your Docker/Local Postgres setup
-CONNECTION_STRING = "postgresql+psycopg2://admin:devpassword@localhost:5432/library_db"
+CONNECTION_STRING = os.environ.get(
+    "DATABASE_URL",
+    "postgresql+psycopg2://admin:devpassword@localhost:5432/library_db"
+)
 COLLECTION_NAME = "pdf_knowledge"
 
 # --- 1. THE INGESTION ENGINE (The "Reading" Part) ---

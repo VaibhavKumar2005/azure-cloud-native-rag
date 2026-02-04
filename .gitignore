@@ -250,3 +250,61 @@ Thumbs.db
 postgres_data/
 mongo_data/
 backend/media/
+
+.env
+*.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+.env.test
+__pycache__/
+*.pyc
+.DS_Store
+media/
+
+# Security & Secrets
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+.secrets/
+secrets.json
+credentials.json
+api_keys.txt
+*.credentials
+
+# Backup files that might contain sensitive data
+*.bak
+*.backup
+*.old
+*.orig
+
+# Documentation with potentially exposed secrets
+SETUP_COMPLETE.md
+FIXES_APPLIED.md
+
+# Security & Secrets
+*.pem
+*.key
+*.cert
+*.crt
+*.p12
+*.pfx
+.secrets/
+secrets.json
+credentials.json
+api_keys.txt
+*.credentials
+
+# Backup files that might contain sensitive data
+*.bak
+*.backup
+*.old
+*.orig
+
+# Documentation with potentially exposed secrets
+SETUP_COMPLETE.md
+FIXES_APPLIED.md

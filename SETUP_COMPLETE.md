@@ -72,12 +72,14 @@ The system verifies every answer against source documents:
 
 ### **Environment Variables** (`.env`):
 ```env
-GOOGLE_API_KEY=AIzaSyBGAHbNUWWoWI_3ipfDJedEA3rh9FNMnFQ
+GOOGLE_API_KEY=your_google_api_key_here
 POSTGRES_DB=library_db
 POSTGRES_USER=admin
-POSTGRES_PASSWORD=devpassword
+POSTGRES_PASSWORD=your_secure_password_here
 POSTGRES_HOST=localhost
 ```
+
+⚠️ **SECURITY NOTE:** Never commit actual API keys to Git. Use `.env` file (which is gitignored) for local development.
 
 ### **API Endpoints:**
 - `POST /api/query/` - Ask questions
