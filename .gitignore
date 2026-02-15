@@ -308,3 +308,6 @@ api_keys.txt
 # Documentation with potentially exposed secrets
 SETUP_COMPLETE.md
 FIXES_APPLIED.md
+vault/
+
+vault_keys.txt

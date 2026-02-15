@@ -37,8 +37,7 @@ SECRET_KEY = os.environ.get(
 if not SECRET_KEY:
     raise ValueError("DJANGO_SECRET_KEY environment variable must be set in production")
 
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
-
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').split(',')
 
 # Application definition
 

@@ -42,11 +42,14 @@ services:
     ports:
       - "8000:8000"
     env_file:           
-      - .env           
+      - .env
+    environment:
+      - POSTGRES_HOST=postgres  # <--- THIS IS THE CRITICAL FIX
+      - POSTGRES_PORT=5432
     depends_on:
       - postgres
       - mongo
-    networks: ["rag-network"] # <--- FIXED: Now it can talk to the database!
+    networks: ["rag-network"]
 
 volumes:
   postgres_data:
