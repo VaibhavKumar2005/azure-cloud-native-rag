@@ -169,7 +169,7 @@ vault/            # HashiCorp Vault config
 
 ## 👨‍💻 Author
 
-**Vaibhav Kumar** - Cloud-Native & AI Engineer
+**Vaibhav Kumar** - Cloud-Native & AI Enthusiast
 
 [![GitHub](https://img.shields.io/badge/GitHub-VaibhavKumar2005-181717?style=flat&logo=github)](https://github.com/VaibhavKumar2005)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0077B5?style=flat&logo=linkedin)](https://linkedin.com/in/vaibhavkumar)
