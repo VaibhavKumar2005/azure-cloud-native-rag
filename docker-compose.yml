@@ -44,16 +44,44 @@ services:
     env_file:           
       - .env
     environment:
-      - POSTGRES_HOST=postgres  # <--- THIS IS THE CRITICAL FIX
+      - POSTGRES_HOST=postgres
       - POSTGRES_PORT=5432
     depends_on:
       - postgres
       - mongo
     networks: ["rag-network"]
 
+  # FIXED: Indentation aligned to the left
+  prometheus:
+    image: prom/prometheus:v2.45.0
+    container_name: rag-prometheus
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - rag-network
+
+  # FIXED: Indentation aligned to the left
+  grafana:
+    image: grafana/grafana:10.0.0
+    container_name: rag-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+    volumes:
+      - grafana_data:/var/lib/grafana
+    networks:
+      - rag-network
+    depends_on:
+      - prometheus
+
 volumes:
   postgres_data:
   mongo_data:
+  grafana_data: # FIXED: Added this missing volume
 
 networks:
   rag-network:

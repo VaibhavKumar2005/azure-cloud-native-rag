@@ -41,21 +41,27 @@ ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost,127.0.0.1,0.0.0.0').s
 
 # Application definition
 
-# 1. Cleaned INSTALLED_APPS (Removed duplicates)
+# In backend/rag_backend/settings.py
+
+# 1. Update INSTALLED_APPS
 INSTALLED_APPS = [
+    'django_prometheus',  
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',      
-    'rest_framework',  
-    'ai_engine',       
+    'corsheaders',
+    'rest_framework',
+    'ai_engine',
+    'django_prometheus', 
 ]
 
+# 2. Update MIDDLEWARE
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware', # MUST be first
+    'django_prometheus.middleware.PrometheusBeforeMiddleware', 
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -63,6 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django_prometheus.middleware.PrometheusAfterMiddleware', 
 ]
 
 ROOT_URLCONF = 'rag_backend.urls'
