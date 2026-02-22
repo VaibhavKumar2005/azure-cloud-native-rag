@@ -18,7 +18,7 @@ services:
       POSTGRES_USER: "${POSTGRES_USER:-admin}"
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD:-devpassword}"
       POSTGRES_DB: "${POSTGRES_DB:-ragdb}"
-    ports: ["5432:5432"]
+    ports: ["5434:5432"] # <--- CHANGED THIS TO 5433
     volumes: ["postgres_data:/var/lib/postgresql/data"]
     networks: ["rag-network"]
 
@@ -49,6 +49,7 @@ services:
     depends_on:
       - postgres
       - mongo
+      - vault  # <--- ADDED THIS
     networks: ["rag-network"]
 
   # FIXED: Indentation aligned to the left
@@ -77,6 +78,8 @@ services:
       - rag-network
     depends_on:
       - prometheus
+      - mongo
+      - vault
 
 volumes:
   postgres_data:
