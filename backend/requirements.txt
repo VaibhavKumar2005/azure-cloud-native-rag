@@ -22,4 +22,5 @@ pypdf==5.1.0
 tiktoken==0.8.0
 numpy==1.26.4
 
-django-prometheus==2.3.1
+django-prometheus
+drf-spectacular

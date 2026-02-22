@@ -20,10 +20,17 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+# 1. Add this import for the Swagger UI
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('ai_engine.urls')), 
-    path('', include('django_prometheus.urls')), # <--- Add this line
+    path('', include('django_prometheus.urls')), 
+    
+    # 2. Add these two lines for the API Interface
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
 ]
 
 # Serve media files in development
